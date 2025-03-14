@@ -1,0 +1,4 @@
+NIDEOVIM_MAKEFILE_DIR := $(dir $(abspath $(firstword $(MAKEFILE_LIST))))nideovim
+MAKEFLAGS := --no-print-directory
+
+include nideovim/make.d/Makefile.variables

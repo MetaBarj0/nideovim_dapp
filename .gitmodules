@@ -1,0 +1,3 @@
+[submodule "nideovim"]
+	path = nideovim
+	url = git@github.com:MetaBarj0/nideovim.git

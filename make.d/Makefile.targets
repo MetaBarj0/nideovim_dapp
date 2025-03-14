@@ -1,0 +1,21 @@
+nideovim/make.d/Makefile.variables:
+	@. make.d/scripts/init_nideovim_submodule.sh
+
+Makefile.env:
+	@. nideovim/make.d/scripts/Makefile.env.sh
+
+build: target_stage=end
+
+config:
+	@. nideovim/make.d/scripts/config.sh
+
+clean: down
+	@. nideovim/make.d/scripts/clean.sh
+
+ps:
+	@. nideovim/make.d/scripts/ps.sh
+
+nuke: down_removes_volumes=yes
+nuke:
+	@. nideovim/make.d/scripts/down.sh
+
