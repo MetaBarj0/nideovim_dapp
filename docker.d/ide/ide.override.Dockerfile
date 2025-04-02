@@ -7,8 +7,23 @@ ARG USER_NAME=root
 USER ${USER_NAME}
 RUN npm install -g create-next-app@^${CREATE_NEXT_APP_MAJOR_VERSION}
 
+FROM install_next AS install_slither_analyzer
+ARG USER_NAME=root
+USER root
+# hadolint ignore=DL3008
+RUN \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  apt-get update \
+  && apt-get install -y --no-install-recommends \
+  pipx
+USER ${USER_NAME}
+# hadolint ignore=DL3013
+RUN pipx install slither-analyzer \
+  && pipx ensurepath
+
 # The last build stage must named 'end'
-FROM install_next AS end
+FROM install_slither_analyzer AS end
 ARG USER_NAME=root
 ARG USER_HOME_DIR=/root
 USER ${USER_NAME}
